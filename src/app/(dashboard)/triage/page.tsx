@@ -3,11 +3,17 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const QuestionsPage = () => {
+const TriagePage = () => {
   const [selectedOption, setSelectedOption] = useState<string>("");
   const router = useRouter();
 
-  const options = ["Rarely", "Sometimes", "Often", "Always"];
+  const options = [
+    "Raramente",
+    "Às vezes",
+    "Frequentemente",
+    "Sempre",
+    "Prefiro não responder"
+  ];
 
   const handleOptionChange = (value: string) => {
     setSelectedOption(value);
@@ -18,27 +24,31 @@ const QuestionsPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-200 p-6">
-      <div className="bg-white rounded-lg shadow-md w-full max-w-[600px]">
-        <div className="p-6">
-          <h2 className="text-3xl font-bold mb-6 text-black text-center">
-            Digital Screening
-          </h2>
-          <p className="text-gray-600 text-center mb-8">
-            Please answer the following questions for the initial assessment.
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-purple-50 to-blue-50 p-6">
+      <div className="bg-white rounded-2xl shadow-lg w-full max-w-[800px] overflow-hidden">
+        {/* Header Section */}
+        <div className="bg-blue-500 p-8 text-white">
+          <h1 className="text-4xl font-bold mb-4 text-center">
+            Triagem Digital
+          </h1>
+          <p className="text-xl text-center opacity-90">
+            Vamos começar a entender seus sintomas com algumas perguntas simples
           </p>
+        </div>
 
-          <div className="space-y-8">
+        <div className="p-8 space-y-8">
+          {/* Questions Section */}
+          <div className="space-y-12">
             {/* First Question */}
-            <div className="space-y-6">
-              <h3 className="text-lg font-medium text-gray-900">
-                1. How often do you experience pelvic pain?
-              </h3>
+            <section className="space-y-6">
+              <h2 className="text-2xl font-semibold text-gray-800">
+                1. Com que frequência você sente dor pélvica?
+              </h2>
               <div className="space-y-4">
                 {options.map((option) => (
                   <label
                     key={option}
-                    className="flex items-center space-x-3 cursor-pointer"
+                    className="flex items-center p-4 space-x-3 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-xl transition-colors"
                   >
                     <input
                       type="radio"
@@ -52,31 +62,43 @@ const QuestionsPage = () => {
                   </label>
                 ))}
               </div>
-            </div>
+            </section>
 
             {/* Second Question */}
-            <div className="space-y-6">
-              <h3 className="text-lg font-medium text-gray-900">
-                2. Where is the pain located?
-              </h3>
-              <div className="border-2 border-gray-300 rounded-md aspect-video w-full max-w-[300px] mx-auto">
-                {/* Empty square for pain location */}
+            <section className="space-y-6">
+              <h2 className="text-2xl font-semibold text-gray-800">
+                2. Onde a dor se localiza?
+              </h2>
+              <div className="bg-gray-50 p-6 rounded-xl">
+                <div className="border-2 border-blue-200 rounded-xl aspect-[4/3] w-full max-w-[400px] mx-auto bg-white relative">
+                  {/* Placeholder for the interactive body map */}
+                  <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+                    Clique ou toque para indicar a área da dor
+                  </div>
+                </div>
+                <p className="text-center text-gray-500 mt-4">
+                  Toque ou clique na imagem para marcar as áreas onde sente dor
+                </p>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
 
-        <div className="px-6 pb-6">
-          <button
-            onClick={handleNext}
-            className="w-full bg-blue-400 hover:bg-blue-500 text-white font-semibold py-4 px-4 rounded-md transition-colors"
-          >
-            Next
-          </button>
+          {/* Action Button */}
+          <div className="pt-8">
+            <button
+              onClick={handleNext}
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-4 px-6 rounded-xl transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 text-lg"
+            >
+              Próximo
+            </button>
+            <p className="text-center text-gray-500 mt-4 text-sm">
+              Suas respostas nos ajudarão a personalizar sua experiência
+            </p>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default QuestionsPage;
+export default TriagePage;
